@@ -1,5 +1,5 @@
 {{-- resources/views/berita.blade.php --}}
-@extends('layouts.app')
+@extends('public.layouts.app')
 
 @section('title', 'FolioFST - Berita')
 

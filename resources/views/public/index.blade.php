@@ -7,12 +7,12 @@
         <meta content="Free Website Template" name="keywords">
         <meta content="Free Website Template" name="description">
 
-        @include('includes.head')
+        @include('public.includes.head')
     </head>
 
     <body data-spy="scroll" data-target=".navbar" data-offset="51">
     {{-- Navbar --}}
-    @include('includes.navbar')
+    @include('public.includes.navbar')
 
 
         <!-- Hero Start -->
@@ -680,12 +680,12 @@
         {{-- About End --}}
 
 {{-- Footer --}}
-@include('includes.footer')
+@include('public.includes.footer')
 
 {{-- Preloader --}}
-@include('includes.preloader')
+@include('public.includes.preloader')
 
 {{-- JavaScript Libraries --}}
-@include('includes.script')
+@include('public.includes.script')
     </body>
 </html>

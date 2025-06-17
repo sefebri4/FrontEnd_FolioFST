@@ -7,18 +7,18 @@
     <meta name="keywords" content="Free Website Template">
     <meta name="description" content="Free Website Template">
     
-    @include('includes.head')
+    @include('public.includes.head')
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="51">
     
-    @include('includes.navbar')
+    @include('public.includes.navbar')
 
     <main>
         @yield('content')
     </main>
 
-    @include('includes.footer')
-    @include('includes.preloader')
-    @include('includes.script')
+    @include('public.includes.footer')
+    @include('public.includes.preloader')
+    @include('public.includes.script')
 </body>
 </html>

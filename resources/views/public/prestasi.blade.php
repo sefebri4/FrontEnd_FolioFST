@@ -1,5 +1,5 @@
 {{-- resources/views/prestasi.blade.php --}}
-@extends('layouts.app')
+@extends('public.layouts.app')
 
 @section('content')
 <!-- Prestasi Start -->
