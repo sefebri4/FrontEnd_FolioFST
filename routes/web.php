@@ -1,51 +1,48 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\DosenController;
-use App\Models\Berita;
 
 // =========================
-// Halaman Utama (Beranda)
+// Route Tampilan Website Umum
 // =========================
-Route::view('/', 'index')->name('beranda');
+
+Route::get('/', [PageController::class, 'index'])->name('beranda');
+
+Route::get('/dekan', [PageController::class, 'dekan'])->name('dekan');
+Route::get('/dosen', [PageController::class, 'dosen'])->name('dosen');
+Route::get('/mahasiswa', [PageController::class, 'mahasiswa'])->name('mahasiswa');
+Route::get('/prestasi', [PageController::class, 'prestasi'])->name('prestasi');
+Route::get('/galeri', [PageController::class, 'galeri'])->name('galeri');
+Route::get('/proyek', [PageController::class, 'proyek'])->name('proyek');
+Route::get('/informasi', [PageController::class, 'informasi'])->name('informasi');
+Route::get('/berita', [PageController::class, 'berita'])->name('berita.index');
+Route::get('/berita/{id}', [PageController::class, 'beritaDetail'])->name('berita.show');
 
 // =========================
-// Route Profil Umum
+// Route Tambahan Jika Diperlukan untuk Admin
 // =========================
-Route::view('/dekan', 'dekan')->name('dekan');
-Route::view('/dosen', 'dosen')->name('dosen');
-Route::view('/mahasiswa', 'mahasiswa')->name('mahasiswa');
+
+// Admin Berita
+Route::resource('/admin/berita', BeritaController::class)->names([
+    'index'   => 'admin.berita.index',
+    'create'  => 'admin.berita.create',
+    'store'   => 'admin.berita.store',
+    'edit'    => 'admin.berita.edit',
+    'update'  => 'admin.berita.update',
+    'destroy' => 'admin.berita.destroy',
+    'show'    => 'admin.berita.show',
+]);
 
 // =========================
-// Route Halaman Lain
+// Route Dosen Berdasarkan Program Studi
 // =========================
-Route::view('/prestasi', 'prestasi')->name('prestasi');
-Route::view('/galeri', 'galeri')->name('galeri');
-Route::view('/proyek', 'proyek')->name('proyek');
-Route::view('/informasi', 'informasi')->name('informasi');
 
-// =========================
-// Route Berita
-// =========================
-Route::get('/berita', function () {
-    $berita = Berita::orderBy('tanggal_posting', 'desc')->paginate(6);
-    return view('berita', compact('berita'));
-})->name('berita.index');
-
-Route::get('/berita/{id}', function ($id) {
-    $berita = Berita::findOrFail($id);
-    return view('berita_detail', compact('berita'));
-})->name('berita.show');
-
-// =========================
-// Route Dosen Publik
-// =========================
 Route::prefix('dosen')->group(function () {
     Route::get('/informatika', [DosenController::class, 'dosenIf'])->name('dosen.if');
     Route::get('/rpl', [DosenController::class, 'dosenRpl'])->name('dosen.rpl');
     Route::get('/sistem-informasi', [DosenController::class, 'dosenSi'])->name('dosen.si');
-    
-    // Route fallback untuk dosen by ID (harus di bawah agar tidak konflik)
     Route::get('/{id}', [DosenController::class, 'show'])->name('dosen.show');
 });
